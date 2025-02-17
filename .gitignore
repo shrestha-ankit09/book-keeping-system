@@ -20,9 +20,6 @@ poetry.lock
 *.egg-info/
 *.dist-info/
 
-# Alembic migrations (do NOT ignore migrations folder)
-migrations/
-
 # Ignore environment-specific docker compose overrides
 docker-compose.override.yml
 
