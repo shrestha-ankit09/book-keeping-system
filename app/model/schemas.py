@@ -16,6 +16,11 @@ class CreateUser(UserBase):
         orm_mode = True
 
 
+class GetUser(BaseModel):
+    email: EmailStr
+
+    class Config:
+        orm_mode = True
 
 
 class BookBase(BaseModel):
