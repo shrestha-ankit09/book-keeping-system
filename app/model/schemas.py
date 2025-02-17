@@ -1,14 +1,20 @@
 from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime
 
-class UserBase(BaseModel):
-    id: int
-    username: str = Field(..., min_length=3, max_length=30)
+class UserBase(BaseModel): 
     email: EmailStr
     password: str
 
     class Config: 
         orm_mode = True
+
+
+class CreateUser(UserBase):
+    username: str = Field(..., min_length=3, max_length=30)
+
+    class Config:
+        orm_mode = True
+
 
 
 
