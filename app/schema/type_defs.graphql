@@ -1,7 +1,9 @@
 type User {
     id: ID!
-    fullName: String
-    email: String
+    username: String!
+    email: String!
+    password: String!
+    token: String
 }
 
 
@@ -16,8 +18,13 @@ type Book {
     user: User
 }
 
-# type Query {
-#     getUser(email: String!): User
-#     getBooks(): [Book!]!
-#     getBook(isbn: String): Book
-# }
+type Query {
+    getUser(email: String!): User
+    getBooks: [Book!]!  
+    getBook(isbn: String): Book
+}
+
+type Mutation {
+    registerUser(username: String!, email: String!, password: String!): User
+    loginUser(email: String!, password: String!): User
+}
