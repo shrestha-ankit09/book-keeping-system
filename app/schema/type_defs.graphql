@@ -3,3 +3,21 @@ type User {
     fullName: String
     email: String
 }
+
+
+type Book {
+    id: ID!
+    isbn: String!
+    title: String!
+    author: String!
+    createdAt: String!
+    updatedAt: String!
+    user_id: Int!
+    user: User
+}
+
+# type Query {
+#     getUser(email: String!): User
+#     getBooks(): [Book!]!
+#     getBook(isbn: String): Book
+# }

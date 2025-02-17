@@ -1,17 +1,10 @@
 from starlette.applications import Starlette
-from starlette.routing import Route
-from starlette.requests import Request
-from starlette.responses import JSONResponse
+from ariadne.asgi import GraphQL
 from app.database.db import SessionLocal, engine, test_db_connection
+from app.schema.schema import schema
 
 
-
-async def home_page(_: Request):
-    return JSONResponse({"success": True, "message": "homepage"})
-
-
-
-app = Starlette(debug=True, routes=[Route("/", home_page)])
+app = Starlette()
 
 
 # Test database connection on startup
@@ -33,4 +26,4 @@ def get_db():
 
 
 
-# app.mount("/graphql", home_page)
+app.mount("/graphql", GraphQL(schema=schema, debug=True))
