@@ -1,0 +1,39 @@
+# Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite
+*.log
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Poetry files
+.poetry/
+poetry.lock
+
+# Starlette and Ariadne specific files (usually generated artifacts)
+*.egg-info/
+*.dist-info/
+
+# Alembic migrations (do NOT ignore migrations folder)
+migrations/
+
+# Ignore environment-specific docker compose overrides
+docker-compose.override.yml
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+.env
