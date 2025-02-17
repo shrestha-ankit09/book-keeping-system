@@ -1,0 +1,24 @@
+[project]
+name = "bksys"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = ">=3.9,<4"  
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4"
+black = ">=25.1.0,<26.0.0"
+uvicorn = ">=0.34.0,<0.35.0"
+starlette = ">=0.45.3,<0.46.0"
+ariadne = "^0.25.2"
+databases = {extras = ["postgresql"], version = "^0.9.0"}
+sqlalchemy = "^2.0.38"
+python-dotenv = "^1.0.1"
+psycopg2-binary = "^2.9.10"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
