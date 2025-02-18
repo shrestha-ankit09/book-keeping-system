@@ -3,7 +3,7 @@ from app.model.userModel import User
 from app.model.bookModel import Book
 from app.database.db import SessionLocal
 from sqlalchemy.orm import Session
-from app.model.schemas import CreateUser, UserBase, CreateBook
+from app.model.schemas import CreateUser, UserBase, CreateBook, UpdateBook
 from pydantic import ValidationError
 from graphql.error import GraphQLError 
 from app.utils.util import hash_password, verify_password
@@ -114,5 +114,35 @@ def resolve_create_book(_, info, input: dict):
         session.rollback()
         raise GraphQLError(f"Error creating book: {str(e)}")
 
+    finally:
+        session.close()
+
+
+@mutation.field("updateBook")
+def resolve_update_book(_, info, input: dict):
+    session: Session = SessionLocal()
+
+    try:
+        validated_book = UpdateBook(**input)
+        book = session.query(Book).filter(Book.isbn == validated_book.isbn).first()
+
+        if not book:
+            raise GraphQLError(f"Book with ISBN {validated_book.isbn} not found")
+        
+        if validated_book.author: 
+            book.author = validated_book.author
+        if validated_book.title:
+            book.title = validated_book.title
+
+        
+        session.commit()
+
+        session.refresh(book)
+
+
+        return {key: value for key, value in book.__dict__.items() if not key.startswith('_')}
+
+    except Exception as e:
+        raise GraphQLError(f"Error updating book: {str(e)}")
     finally:
         session.close()
