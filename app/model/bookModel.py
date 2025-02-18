@@ -16,7 +16,8 @@ class Book(Base):
     author = Column(String, nullable=False)
 
     createdAt = Column(DateTime, default=datetime.now(timezone.utc))
-    updatedAt = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
+
+    updateAt = Column(DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
