@@ -31,8 +31,15 @@ input CreateBookInput {
     user_id: Int!
 }
 
+input updateBookInput{
+    isbn: String!
+    title: String
+    author: String
+}
+
 type Mutation {
     registerUser(username: String!, email: String!, password: String!): User
     loginUser(email: String!, password: String!): User
     createBook(input: CreateBookInput): Book!
+    updateBook(input: updateBookInput): Book!
 }
