@@ -3,7 +3,7 @@ from app.model.userModel import User
 from app.model.bookModel import Book
 from app.database.db import SessionLocal
 from sqlalchemy.orm import Session
-from app.model.schemas import CreateUser, UserBase, CreateBook, UpdateBook
+from app.model.schemas import CreateUser, UserBase, CreateBook, UpdateBook, DeleteBook
 from pydantic import ValidationError
 from graphql.error import GraphQLError 
 from app.utils.util import hash_password, verify_password
@@ -144,5 +144,28 @@ def resolve_update_book(_, info, input: dict):
 
     except Exception as e:
         raise GraphQLError(f"Error updating book: {str(e)}")
+    finally:
+        session.close()
+
+
+@mutation.field("deleteBook")
+def resolve_delete_book(_, info, input: dict):
+    session: Session = SessionLocal()
+
+    try:
+        validate_input = DeleteBook(**input)
+
+        book = session.query(Book).filter(Book.isbn == validate_input.isbn).first()
+
+        if not book:
+            raise GraphQLError(f"Book with ISBN {input['isbn']} not found")
+        
+        session.delete(book)
+        session.commit()
+
+        return {key:value for key, value in book.__dict__.items() if not key.startswith("_")}
+
+    except Exception as e:
+        raise GraphQLError(f"Error deleteing book {str(e)}")
     finally:
         session.close()

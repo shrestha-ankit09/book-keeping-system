@@ -37,9 +37,16 @@ input updateBookInput{
     author: String
 }
 
+input deleteBookInput {
+    isbn: String!
+}
+
 type Mutation {
     registerUser(username: String!, email: String!, password: String!): User
     loginUser(email: String!, password: String!): User
     createBook(input: CreateBookInput): Book!
     updateBook(input: updateBookInput): Book!
+    deleteBook(input: deleteBookInput): Book!
 }
+
+
