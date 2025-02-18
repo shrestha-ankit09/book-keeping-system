@@ -44,3 +44,10 @@ class UpdateBook(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class DeleteBook(BaseModel):
+    isbn: str
+
+    class Config:
+        orm_mode = True
