@@ -24,14 +24,14 @@ class GetUser(BaseModel):
 
 
 class BookBase(BaseModel):
-    id: int
     isbn: str
     title: str
     author:str
-    createdAt: datetime
-    updateAt: datetime
+
+
+
+
+class CreateBook(BookBase):
     user_id: int
-
-
     class Config:
         orm_mode = True

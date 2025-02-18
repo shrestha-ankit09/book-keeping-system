@@ -4,8 +4,8 @@ type User {
     email: String!
     password: String!
     token: String
+    books: [Book!]!
 }
-
 
 type Book {
     id: ID!
@@ -13,18 +13,26 @@ type Book {
     title: String!
     author: String!
     createdAt: String!
-    updatedAt: String!
+    updateAt: String!
     user_id: Int!
     user: User
 }
 
 type Query {
     getUser(email: String!): User
-    getBooks: [Book!]!  
+    getBooks: [Book!]!
     getBook(isbn: String): Book
+}
+
+input CreateBookInput {
+    isbn: String!
+    title: String!
+    author: String!
+    user_id: Int!
 }
 
 type Mutation {
     registerUser(username: String!, email: String!, password: String!): User
     loginUser(email: String!, password: String!): User
+    createBook(input: CreateBookInput): Book!
 }
